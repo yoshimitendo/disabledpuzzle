@@ -1,11 +1,3 @@
-if (/Line/i.test(navigator.userAgent)) {
-    document.body.innerHTML = `
-        <div style="text-align:center; padding:50px;">
-            Line上では開くことができません
-        </div>
-    `;
-}
-
 const game = document.getElementById("GameLayer");
 const board = document.getElementById("Board");
 const scoreText = document.getElementById("Score");
