@@ -57,7 +57,7 @@ let score = 0;
 
 let isGameOver = false;
 
-const TARGET_COUNT = 150;
+const TARGET_COUNT = 144;
 
 const targets = [];
 const boxTargets = [];
