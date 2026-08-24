@@ -1,6 +1,6 @@
 if (/Line/i.test(navigator.userAgent)) {
     document.body.innerHTML = `
-        <div style="text-align:center; padding:50px; font-color:white">
+        <div style="text-align:center; padding:50px; color:white">
             Line上では開くことができません殺すぞ
         </div>
     `;
