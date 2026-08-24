@@ -1,12 +1,3 @@
-if (/Line/i.test(navigator.userAgent)) {
-    document.body.style.background = "white";
-    document.body.innerHTML = `
-        <div style="text-align:center; padding:50px;">
-            Line上では開くことができません殺すぞ
-        </div>
-    `;
-}
-
 const game = document.getElementById("GameLayer");
 const board = document.getElementById("Board");
 const scoreText = document.getElementById("Score");
