@@ -1,0 +1,116 @@
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    width: 100%;
+    height: 100dvh;
+}
+
+body {
+    touch-action: none;
+    user-select: none;
+    -webkit-user-select: none;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: black;
+}
+
+#GameLayer {
+    position: relative;
+    
+    flex-shrink: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    background-image: url("images/background.png");
+    background-size: cover;
+    background-position: center 0;
+}
+
+#Board {
+    position: absolute;
+    top: 300px;
+}
+
+#Score {
+    position: absolute;
+    
+    padding: 0 20px;
+    top: 160px;
+    left: 100px;
+    z-index: 1000;
+
+    color: black;
+    font-size: 36px;
+    font-family: sans-serif;
+    background: #fffc61;
+    border-radius: 100px;
+    border: 5px solid black;
+}
+
+#Box {
+    position: absolute;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    bottom: 200px;
+}
+
+#BoxBase {
+    position: absolute;
+    overflow: hidden;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 32px;
+    border: 5px solid #532f09;
+    background: #a05d31;
+    filter: drop-shadow(0 25px 0 #a05d31);
+
+}
+
+#BoxFrame {
+    position: absolute;
+
+    border-radius: 28px;
+    border: 12px solid #d48b5b;
+    filter: drop-shadow(0 12px 0 #703b19);
+}
+
+#BoxSide {
+    position: absolute;
+
+    height: 22px;
+
+    border-radius: 8px;
+    border: 5px solid #0f0700;
+    background: #492007;
+}
+
+.target {
+    position: absolute;
+
+    cursor: pointer;
+}
+
+.front, .side {
+    position: absolute;
+
+    -webkit-touch-callout: none;
+    -webkit-user-drag: none;
+
+    border-radius: 15px;
+    border: 5px solid #3a660e;
+    background: #79c52f;
+}
