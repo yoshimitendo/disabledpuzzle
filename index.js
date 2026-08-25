@@ -170,6 +170,9 @@ function checkVisible() {
         if (!overlap) {
             t1.visible = true;
             t1.style.filter = "brightness(1.0)";
+            if (t1.image === 11) {
+                t1.style.filter = "brightness(2.0)";
+            }
         }
     });
 }
