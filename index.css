@@ -6,6 +6,7 @@ html, body {
     margin: 0;
     width: 100%;
     height: 100dvh;
+    overflow: hidden;
 }
 
 body {
@@ -21,13 +22,10 @@ body {
 }
 
 #GameLayer {
-    position: relative;
-    
     flex-shrink: 0;
 
     display: flex;
     justify-content: center;
-    align-items: center;
     
     background-image: url("images/background.png");
     background-size: cover;
@@ -62,7 +60,7 @@ body {
     justify-content: center;
     align-items: center;
 
-    bottom: 200px;
+    bottom: 220px;
 }
 
 #BoxBase {
@@ -113,4 +111,52 @@ body {
     border-radius: 15px;
     border: 5px solid #3a660e;
     background: #79c52f;
+}
+
+#Items {
+    position: absolute;
+
+    bottom: 160px;
+}
+
+#Item1, #Item2, #Item3 {
+    position: absolute;
+
+    display: flex;
+    justify-content: center;
+
+    filter: brightness(0.5);
+    cursor: pointer;
+}
+
+#Item1 {
+   right: 160px; 
+}
+
+#Item3 {
+    left: 160px;
+}
+
+.ItemFront, .ItemSide {
+    position: absolute;
+
+    width: 116px;
+    height: 116px;
+
+    border-radius: 15px;
+    border: 5px solid black;
+}
+
+.ItemFront {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    top: 0;
+    background: #ffe42e;
+}
+
+.ItemSide {
+    top: 16px;
+    background: #b28601;
 }
