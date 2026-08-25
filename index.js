@@ -6,6 +6,10 @@ const boxBase = document.getElementById("BoxBase");
 const boxFrame = document.getElementById("BoxFrame");
 const boxSide = document.getElementById("BoxSide");
 
+document.addEventListener('dblclick', function(e) {
+    e.preventDefault();
+}, { passive: false });
+
 const GAME_WIDTH = 1080;
 const GAME_HEIGHT = 1920;
 
