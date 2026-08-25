@@ -5,10 +5,7 @@ const box = document.getElementById("Box");
 const boxBase = document.getElementById("BoxBase");
 const boxFrame = document.getElementById("BoxFrame");
 const boxSide = document.getElementById("BoxSide");
-
-document.addEventListener('dblclick', function(e) {
-    e.preventDefault();
-}, { passive: false });
+const item1 = document.getElementById("Item1");
 
 const GAME_WIDTH = 1080;
 const GAME_HEIGHT = 1920;
@@ -49,9 +46,15 @@ function resizeGame() {
 window.addEventListener("resize", resizeGame);
 resizeGame();
 
+document.addEventListener('dblclick', function(e) {
+    e.preventDefault();
+}, { passive: false });
+
 let score = 0;
 
 let isGameOver = false;
+let before = null;
+let beforeRemove = [];
 
 const TARGET_COUNT = 144;
 
@@ -69,8 +72,6 @@ for (let i = 0; i < TARGET_COUNT; i++) {
     target.visible = false;
     target.board = true;
 
-    target.style.filter = "brightness(0.4)";
-
     const side = document.createElement("div");
     side.className = "side";
     side.style.top = `${SIDE_SIZE * 2}px`;
@@ -85,10 +86,7 @@ for (let i = 0; i < TARGET_COUNT; i++) {
     front.style.height = `${GRID_SIZE * 2}px`;
     target.appendChild(front);
 
-    const x = target.gridX * GRID_SIZE;
-    const y = target.gridY * (GRID_SIZE + SIDE_SIZE);
-    target.style.left = `${x}px`;
-    target.style.top = `${y}px`;
+    putTargetBoard(target);
 
     target.addEventListener("pointerdown", (e) => {
         e.preventDefault();
@@ -103,8 +101,12 @@ for (let i = 0; i < TARGET_COUNT; i++) {
             box.appendChild(target);
             target.style.top = "0";
 
+            before = target.layer;
+            beforeRemove = [];
+            item1.style.filter = "brightness(1.0)"
             addTarget(target);
             removeTarget();
+            updataBox();
             if (boxTargets.length >= BOX_SIZE) {
                 isGameOver = true;
             }
@@ -115,6 +117,13 @@ for (let i = 0; i < TARGET_COUNT; i++) {
 
     targets.push(target);
 };
+
+function putTargetBoard(t) {
+    const x = t.gridX * GRID_SIZE;
+    const y = t.gridY * (GRID_SIZE + SIDE_SIZE);
+    t.style.left = `${x}px`;
+    t.style.top = `${y}px`;
+}
 
 function addTarget(t1) {
     let count = 0;
@@ -135,7 +144,8 @@ function removeTarget() {
             count++
             if (count >= 3) {
                 for (let j = i; j > i - 3; j--) {
-                    boxTargets[j].remove();
+                    beforeRemove.push(boxTargets[j]);
+                    boxTargets[j].style.display = "none";
                     boxTargets.splice(j, 1);
                 }
                 count = 0;
@@ -145,7 +155,9 @@ function removeTarget() {
             count = 1;
         }
     });
+}
 
+function updataBox() {
     boxTargets.forEach((t, i) => {
         t.style.left = `${i * GRID_SIZE * 2}px`;
     });
@@ -153,6 +165,7 @@ function removeTarget() {
 
 function checkVisible() {
     targets.forEach((t1) => {
+        t1.visible = false;
         let overlap = false;
         for (const t2 of targets) {
             if (!t2.board) {
@@ -167,11 +180,37 @@ function checkVisible() {
                 break;
             }
         }
-        if (!overlap) {
-            t1.visible = true;
+        if (!overlap) {t1.visible = true;}
+        if (t1.visible) {
             t1.style.filter = "brightness(1.0)";
+        } else {
+            t1.style.filter = "brightness(0.4)";
         }
     });
 }
 
 checkVisible();
+
+item1.addEventListener("pointerdown", (e) => {
+    e.preventDefault();
+    if (before === null) {return;}
+    if (beforeRemove) {
+        for (const t of beforeRemove) {
+            addTarget(t);
+            t.style.display = "";
+        }
+    }
+    const t = targets[before];
+    t.board = true;
+    checkVisible();
+    board.appendChild(t);
+    putTargetBoard(t);
+    const index = boxTargets.findIndex(i => i === t);
+    boxTargets.splice(index, 1);
+    updataBox();
+    before = null;
+    if (boxTargets.length < BOX_SIZE) {
+        isGameOver = false;
+    }
+item1.style.filter = "brightness(0.5)"
+})
